@@ -3,25 +3,107 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hong Kong Neighorhood Map</title>
-  <style>
-    html,
-    body {
-      font-family: Arial, sans-serif;
-      height: 100%;
-      margin: 0;
-      padding: 0;
+  <style type="text/css">
+    * {
+      box-sizing: border-box;
     }
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+    }
+
+    header {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 2;
+    }
+
+    a#menu svg {
+      width: 40px;
+      fill: black;
+    }
+
+    .container {
+      height: 100%;
+      width: 100%;
+    }
+
+    aside {
+      background-color: rgba(255,255,255,0.6);
+      width: 300px;
+      height: 100%;
+      padding: 1em;
+      z-index: 1;
+      position: absolute;
+      transform: translate(-300px,0);
+      transition: transform 0.3s ease;
+    }
+
+    aside.open {
+      transform: translate(0,0);
+    }
+
+    main {
+      background-color: black;
+      height: 100%;
+      width: 100%
+    }
+
 
     #map {
       height: 100%;
     }
-  </style>
 
+    @media screen and (min-width: 700px) {
+      .container {
+        display: flex;
+        flex-flow: row nowrap;
+      }
+      aside {
+        position: relative;
+        transform: translate(0,0);
+      }
+      header {
+        display: none;
+      }
+    }
+  </style>
+  <title>Hong Kong Neighorhood Map</title>
 </head>
 <body>
-  <div id="map"></div>
-  <script>
+  <div class="container">
+    <aside id="drawer">
+      <h1>Hong Kong Neighorhood Map</h1>
+      <h2>Siderbar</h2>
+      <p>Put the list of place here</p>
+    </aside>
+    <main>
+      <header>
+        <a id="menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"/>
+          </svg>
+        </a>
+      </header>
+      <div id="map"></div>
+    </main>
+  </div>
+  <script type="text/javascript">
+    var menu = document.querySelector('#menu');
+    var main = document.querySelector('main');
+    var drawer = document.querySelector('#drawer');
+
+    menu.addEventListener('click', function(e) {
+      drawer.classList.toggle('open');
+      e.stopPropagation();
+    });
+    main.addEventListener('click', function() {
+      drawer.classList.remove('open');
+    });
+  </script>
+  <script type="text/javascript">
     var map;
     function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
