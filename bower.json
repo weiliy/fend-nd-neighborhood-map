@@ -1,0 +1,20 @@
+{
+  "name": "fend-neighborhood-map",
+  "homepage": "https://github.com/weiliy/fend-neighborhood-map",
+  "authors": [
+    "Weili Yi <yi@weiliy.net>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "knockout": "^3.4.0"
+  }
+}
