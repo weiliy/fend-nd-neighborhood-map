@@ -25,3 +25,9 @@ var places = [
   'Hong Kong Cultural Centre',
   'Bank of China Tower'
 ]
+
+var PlacesViewModel = function() {
+  this.places = ko.observable(places)
+}
+
+ko.applyBindings(new PlacesViewModel());

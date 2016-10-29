@@ -75,9 +75,11 @@
 <body>
   <div class="container">
     <aside id="drawer">
-      <h1>Hong Kong Neighorhood Map</h1>
-      <h2>Siderbar</h2>
-      <p>Put the list of place here</p>
+      <h2>Hong Kong Neighorhood Map</h2>
+      <input type="text"><input type="button" value="Search">
+      <ul data-bind="foreach: places">
+        <li data-bind="text: $data"></li>
+      </ul>
     </aside>
     <main>
       <header>
