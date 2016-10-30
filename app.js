@@ -26,8 +26,24 @@ var places = [
   'Bank of China Tower'
 ]
 
-var PlacesViewModel = function() {
-  this.places = ko.observable(places)
+var NeighorhoodViewModel = function() {
+  var self = this;
+  self.places = ko.observableArray([]);
+
+  self.places(places);
+
+  if (!google) {
+    alert("google is not found!");
+  } else {
+    console.log("google is found!");
+  }
 }
 
-ko.applyBindings(new PlacesViewModel());
+function initMap(){
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 22.282467, lng: 114.161573},
+    zoom: 12
+  });
+  ko.applyBindings(new NeighorhoodViewModel());
+}
+
