@@ -3,7 +3,10 @@ var NeighorhoodViewModel = function() {
   self.places = ko.observableArray([]);
 
   $.getJSON('/data.json', function(d) {
+    console.log(d.payload.places);
     self.places(d.payload.places);
+  }).fail(function(){
+    alert("failed to load data.json");
   });
 };
 

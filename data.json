@@ -1,0 +1,184 @@
+
+
+{
+  "success": true,
+  "payload": {
+    "places": [
+      {
+        "title": "Victoria Peak",
+        "location": {
+          "lat": 22.275884,
+          "lng": 114.145532
+        }
+      },
+      {
+        "title": "Ocean Park Hong Kong",
+        "location": {
+          "lat": 22.234636,
+          "lng": 114.172175
+        }
+      },
+      {
+        "title": "Hong Kong Disneyland",
+        "location": {
+          "lat": 22.316994,
+          "lng": 114.045306
+        }
+      },
+      {
+        "title": "Lantau Island",
+        "location": {
+          "lat": 22.247847,
+          "lng": 113.917959
+        }
+      },
+      {
+        "title": "Tian Tan Buddha",
+        "location": {
+          "lat": 22.253985,
+          "lng": 113.904984
+        }
+      },
+      {
+        "title": "Ngong Ping 360",
+        "location": {
+          "lat": 22.256316,
+          "lng": 113.901416
+        }
+      },
+      {
+        "title": "Po Lin Monastery",
+        "location": {
+          "lat": 22.255481,
+          "lng": 113.90788
+        }
+      },
+      {
+        "title": "Happy Valley Racecourse",
+        "location": {
+          "lat": 22.275472,
+          "lng": 114.180629
+        }
+      },
+      {
+        "title": "Hong Kong Museum of History",
+        "location": {
+          "lat": 22.301939,
+          "lng": 114.1774
+        }
+      },
+      {
+        "title": "Lamma Island",
+        "location": {
+          "lat": 22.200006,
+          "lng": 114.135017
+        }
+      },
+      {
+        "title": "Repulse Bay",
+        "location": {
+          "lat": 66.528295,
+          "lng": -86.244657
+        }
+      },
+      {
+        "title": "Cheung Chau",
+        "location": {
+          "lat": 22.201618,
+          "lng": 114.026501
+        }
+      },
+      {
+        "title": "Man Mo Temple",
+        "location": {
+          "lat": 22.283884,
+          "lng": 114.150181
+        }
+      },
+      {
+        "title": "Tung Choi Street",
+        "location": {
+          "lat": 22.321062,
+          "lng": 114.1702
+        }
+      },
+      {
+        "title": "Wong Tai Sin Temple",
+        "location": {
+          "lat": 22.343606,
+          "lng": 114.193019
+        }
+      },
+      {
+        "title": "Ten Thousand Buddhas Monastery",
+        "location": {
+          "lat": 22.38739,
+          "lng": 114.184854
+        }
+      },
+      {
+        "title": "Clock Tower, Hong Kong",
+        "location": {
+          "lat": 22.293678,
+          "lng": 114.169364
+        }
+      },
+      {
+        "title": "Hong Kong Space Museum",
+        "location": {
+          "lat": 22.294242,
+          "lng": 114.171874
+        }
+      },
+      {
+        "title": "Hong Kong Wetland Park",
+        "location": {
+          "lat": 22.468565,
+          "lng": 114.005192
+        }
+      },
+      {
+        "title": "Hong Kong Heritage Museum",
+        "location": {
+          "lat": 22.377739,
+          "lng": 114.186262
+        }
+      },
+      {
+        "title": "Madame Tussauds Hong Kong",
+        "location": {
+          "lat": 22.271244,
+          "lng": 114.150006
+        }
+      },
+      {
+        "title": "Hong Kong Science Museum",
+        "location": {
+          "lat": 22.301028,
+          "lng": 114.17759
+        }
+      },
+      {
+        "title": "Hong Kong Zoological and Botanical Gardens",
+        "location": {
+          "lat": 22.27802,
+          "lng": 114.156473
+        }
+      },
+      {
+        "title": "Hong Kong Cultural Centre",
+        "location": {
+          "lat": 22.293758,
+          "lng": 114.170457
+        }
+      },
+      {
+        "title": "Bank of China Tower",
+        "location": {
+          "lat": 22.279249,
+          "lng": 114.161566
+        }
+      }
+    ]
+  }
+}
