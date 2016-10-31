@@ -1,18 +1,38 @@
 var PlaceModel = function(place) {
-  this.title = ko.observable(place.title);
-  this.markup = ko.observable();
-  this.location  = ko.observable();
+  'use strict';
+  var self = this
+  self.title = place.title;
+  self.location = place.location;
+  self.display = ko.observable(false);
+  self.marker = new google.maps.Marker({
+    position: place.location,
+    title: place.title,
+    animation: google.maps.Animation.DROP
+  });
+
+  self.display.subscribe(function(d) {
+    if (d) {
+      self.marker.setMap(map);
+    } else {
+      self.marker.setMap(null);
+    }
+  });
 };
 
 var NeighorhoodViewModel = function() {
+  'use strict';
   var self = this;
   self.places = ko.observableArray([]);
 
+  // Load place datas
   $.getJSON('/data.json', function(d) {
-    console.log(d.payload.places);
     var mappedPlaces = $.map(d.payload.places, function(place){
       return new PlaceModel(place);
     });
+    for (var i = mappedPlaces.length - 1; i >= 0; i--) {
+      mappedPlaces[i].display(true);
+    }
+
     self.places(mappedPlaces);
   }).fail(function(){
     alert("failed to load data.json");
