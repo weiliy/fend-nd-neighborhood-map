@@ -1,3 +1,5 @@
+var map;
+
 var PlaceModel = function(place) {
   'use strict';
   var self = this
