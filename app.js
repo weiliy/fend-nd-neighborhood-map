@@ -22,38 +22,65 @@ function initMap(){
   // mouses over the marker.
   var highlightedIcon = makeMarkerIcon('FFFF24');
 
-  // Create a Marker
-  function makeMarker(place) {
+  function makeMarker(place, active) {
     var marker = new google.maps.Marker({
       position: place.location,
       title: place.title,
       icon: defaultIcon,
       animation: google.maps.Animation.DROP
     });
-    console.log(highlightedIcon);
+
     marker.addListener('mouseover', function() {
       this.setIcon(highlightedIcon);
     });
+
     marker.addListener('mouseout', function() {
       this.setIcon(defaultIcon);
+    });
+
+    // When the click the mark can active or deactive this place
+    marker.addListener('click', function() {
+      active(!active());
     });
 
     return marker;
   }
 
+  function makeInfoWindow(place) {
+    var contentString = '<h1>' + place.title + '</h1>'
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    return infowindow;
+  }
+
   var PlaceModel = function(place) {
     'use strict';
     var self = this
+    // if this place display on the map
+    self.display = ko.observable(false);
+
+    // if this place is active
+    self.active = ko.observable(false);
+
     self.title = place.title;
     self.location = place.location;
-    self.display = ko.observable(false);
-    self.marker = makeMarker(place);
+    self.infowindow = makeInfoWindow(place);
+    self.marker = makeMarker(place, self.active);
 
-    self.display.subscribe(function(d) {
-      if (d) {
+    self.display.subscribe(function(display) {
+      if (display) {
         self.marker.setMap(map);
       } else {
         self.marker.setMap(null);
+      }
+    });
+
+    self.active.subscribe(function(active){
+      if (active) {
+        self.infowindow.open(map, self.marker);
+      } else {
+        self.infowindow.close();
       }
     });
   };
