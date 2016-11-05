@@ -137,7 +137,9 @@ function initMap(){
 
   var NeighorhoodViewModel = function() {
     var self = this;
+
     self.places = ko.observableArray([]);
+
     self.displayPlaces = ko.computed(function(){
       var places = self.places();
       var displayPlaces = [];
@@ -148,6 +150,7 @@ function initMap(){
       }
       return displayPlaces;
     });
+
     self.filter = function() {
       var searchString = $('#filter').val().toLowerCase();
       var places = self.places();
@@ -158,6 +161,18 @@ function initMap(){
           places[i].display(false);
         }
       }
+    };
+
+    self.deactiveAll = function() {
+      var places = self.places();
+      for (var i = places.length - 1; i >= 0; i--) {
+        places[i].active(false);
+      }
+    };
+
+    self.activeThis = function() {
+      self.deactiveAll();
+      this.active(true);
     };
 
     // Load place datas
