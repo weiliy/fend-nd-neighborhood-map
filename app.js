@@ -77,12 +77,10 @@ function initMap(){
     });
 
     jqXHR.done(function(d){
-      console.log(place.title + ': ' + d);
       contentHTML = '<h2>' + place.title + '</h2>' +
         '<hr/>' +
         '<a href="' + (d[3][1] || d[3]) + '">' + (d[1][1] || d[1]) + '</a>' +
         '<p>' + (d[2][1] || d[2]) + '</p>';
-      console.log(contentHTML);
       place.infowindow = new google.maps.InfoWindow({
         content: contentHTML
       });
@@ -111,8 +109,11 @@ function initMap(){
     self.active = ko.observable(false);
 
     self.title = place.title;
+
     self.location = place.location;
+
     self.infowindow = makeInfoWindow(place);
+
     self.marker = makeMarker(place, self.active);
 
     self.display.subscribe(function(display) {
@@ -137,6 +138,17 @@ function initMap(){
   var NeighorhoodViewModel = function() {
     var self = this;
     self.places = ko.observableArray([]);
+    self.displayPlaces = ko.computed(function(){
+      var places = self.places();
+      var displayPlaces = [];
+      for (var i = 0; i < places.length; i++) {
+        if (places[i].display()) {
+          displayPlaces.push(places[i]);
+        }
+      }
+      console.log('displayPlaces: ' + displayPlaces);
+      return displayPlaces;
+    });
 
     // Load place datas
     $.getJSON('/data.json', function(d) {

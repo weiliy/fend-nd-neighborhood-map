@@ -77,7 +77,7 @@
     <aside id="drawer">
       <h2>Hong Kong Neighorhood Map</h2>
       <input type="text"><input type="button" value="Search">
-      <ul data-bind="foreach: places">
+      <ul data-bind="foreach: displayPlaces()">
         <li><input type="checkbox" data-bind="checked: $data.display"/><span data-bind="text: $data.title"></span></li>
       </ul>
     </aside>
