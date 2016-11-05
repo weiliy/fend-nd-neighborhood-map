@@ -146,9 +146,19 @@ function initMap(){
           displayPlaces.push(places[i]);
         }
       }
-      console.log('displayPlaces: ' + displayPlaces);
       return displayPlaces;
     });
+    self.filter = function() {
+      var searchString = $('#filter').val().toLowerCase();
+      var places = self.places();
+      for (var i = places.length - 1; i >= 0; i--) {
+        if ( places[i].title.toLowerCase().search(searchString) != -1){
+          places[i].display(true);
+        } else {
+          places[i].display(false);
+        }
+      }
+    };
 
     // Load place datas
     $.getJSON('/data.json', function(d) {
