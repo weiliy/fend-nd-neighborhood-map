@@ -31,14 +31,6 @@ function initMap(){
       animation: google.maps.Animation.DROP
     });
 
-    marker.addListener('mouseover', function() {
-      this.setIcon(highlightedIcon);
-    });
-
-    marker.addListener('mouseout', function() {
-      this.setIcon(defaultIcon);
-    });
-
     // When the click the mark can active or deactive this place
     marker.addListener('click', function() {
       active(!active());
@@ -127,8 +119,10 @@ function initMap(){
     self.active.subscribe(function(active){
       if (active) {
         self.infowindow.open(map, self.marker);
+        self.marker.setIcon(highlightedIcon);
       } else {
         self.infowindow.close();
+        self.marker.setIcon(defaultIcon);
       }
     });
 
