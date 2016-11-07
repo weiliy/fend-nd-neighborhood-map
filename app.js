@@ -36,7 +36,7 @@ function initMap(){
   var searchWikiAlertOnce = true;
 
   var searchWiki = function(place) {
-    var apiUrl = 'https://en.wikipedia.org/w/api.php'
+    var apiUrl = 'https://en.wikipedia.org/w/api.php';
     var contentHTML;
 
     var jqXHR = $.ajax({
@@ -73,11 +73,10 @@ function initMap(){
         content: contentHTML
       });
     });
-  }
+  };
 
   var PlaceModel = function(place) {
-    'use strict';
-    var self = this
+    var self = this;
     // if this place display on the map
     self.display = ko.observable(false);
 
@@ -124,7 +123,7 @@ function initMap(){
     });
 
     return marker;
-  }
+  };
 
   var NeighorhoodViewModel = function() {
     var self = this;
@@ -183,7 +182,7 @@ function initMap(){
   } else {
     googleError();
   }
-};
+}
 
 function googleError() {
   $('#map').html('<h3>Ah... Error Occurred. Cannot connect to google maps api! Please check your network connection.<h3>');
