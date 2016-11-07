@@ -53,13 +53,10 @@ function initMap(){
     });
 
     jqXHR.done(function(d){
-      contentHTML = '<h2>' + place.title + '</h2>' +
+      place.contentHTML = '<h2>' + place.title + '</h2>' +
         '<hr/>' +
         '<a href="' + (d[3][1] || d[3]) + '">' + (d[1][1] || d[1]) + '</a>' +
         '<p>' + (d[2][1] || d[2]) + '</p>';
-      place.infowindow = new google.maps.InfoWindow({
-        content: contentHTML
-      });
     });
 
     jqXHR.fail(function(d){
@@ -68,10 +65,7 @@ function initMap(){
         searchWikiAlertOnce = false;
       }
 
-      contentHTML = '<h2>' + place.title + '<h2>';
-      place.infowindow = new google.maps.InfoWindow({
-        content: contentHTML
-      });
+      place.contentHTML = '<h2>' + place.title + '<h2>';
     });
   };
 
@@ -87,6 +81,10 @@ function initMap(){
 
     self.location = place.location;
 
+    self.contentHTML = '<h2>' + place.title + '</h2>' +
+      '<hr/>' +
+      '<p>loading data from wikipedia, please reopen later</p>';
+
     self.infowindow = makeInfoWindow(place);
 
     self.marker = self.makeMarker(place, self.active);
@@ -97,6 +95,7 @@ function initMap(){
 
     self.active.subscribe(function(active){
       if (active) {
+        self.infowindow.setContent(self.contentHTML);
         self.infowindow.open(map, self.marker);
         self.marker.setIcon(highlightedIcon);
       } else {
