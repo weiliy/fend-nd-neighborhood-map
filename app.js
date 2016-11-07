@@ -132,6 +132,12 @@ function initMap(){
   var NeighorhoodViewModel = function() {
     var self = this;
 
+    self.isOpenSiderbar = ko.observable(false);
+
+    self.toggleMenu = function() {
+      self.isOpenSiderbar(!self.isOpenSiderbar());
+    };
+
     self.places = ko.observableArray([]);
 
     self.displayPlaces = ko.computed(function(){

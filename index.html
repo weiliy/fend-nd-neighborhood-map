@@ -9,7 +9,7 @@
 </head>
 <body>
   <div class="container">
-    <aside id="drawer">
+    <aside data-bind="css: { open: isOpenSiderbar() }">
       <h2>Hong Kong Neighorhood Map</h2>
       <input id='filter' type="text" placeholder="search here" data-bind="event: {keyup: filter}">
       <ul data-bind="foreach: displayPlaces()">
@@ -18,7 +18,7 @@
     </aside>
     <main>
       <header>
-        <a id="menu">
+        <a id="menu" data-bind="click: toggleMenu">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"/>
           </svg>
@@ -27,19 +27,6 @@
       <div id="map"></div>
     </main>
   </div>
-  <script type="text/javascript">
-    var menu = document.querySelector('#menu');
-    var main = document.querySelector('main');
-    var drawer = document.querySelector('#drawer');
-
-    menu.addEventListener('click', function(e) {
-      drawer.classList.toggle('open');
-      e.stopPropagation();
-    });
-    main.addEventListener('click', function() {
-      drawer.classList.remove('open');
-    });
-  </script>
   <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="bower_components/knockout/dist/knockout.js"></script>
   <script type="text/javascript" src="app.js"></script>
