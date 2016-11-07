@@ -93,11 +93,7 @@ function initMap(){
     self.marker = self.makeMarker(place, self.active);
 
     self.display.subscribe(function(display) {
-      if (display) {
-        self.marker.setMap(map);
-      } else {
-        self.marker.setMap(null);
-      }
+      self.marker.setVisible(display);
     });
 
     self.active.subscribe(function(active){
@@ -115,6 +111,7 @@ function initMap(){
 
   PlaceModel.prototype.makeMarker = function(place, active) {
     var marker = new google.maps.Marker({
+      map: map,
       position: place.location,
       title: place.title,
       icon: defaultIcon,
