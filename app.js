@@ -136,29 +136,18 @@ function initMap(){
     };
 
     self.places = ko.observableArray([]);
-
+    self.filterKeyword = ko.observable('');
     self.displayPlaces = ko.computed(function(){
       var places = self.places();
-      var displayPlaces = [];
-      for (var i = 0; i < places.length; i++) {
-        if (places[i].display()) {
-          displayPlaces.push(places[i]);
-        }
-      }
-      return displayPlaces;
-    });
-
-    self.filterKeyword = ko.observable('');
-
-    self.filterKeyword.subscribe(function(kw) {
-      var searchString = kw.toLowerCase();
-      var places = self.places();
-      for (var i = places.length - 1; i >= 0; i--) {
-        if ( places[i].title.toLowerCase().search(searchString) != -1){
-          places[i].display(true);
-        } else {
-          places[i].display(false);
-        }
+      var filter = self.filterKeyword().toLowerCase();
+      if (!filter) {
+        return places;
+      } else {
+        return ko.utils.arrayFilter(places, function(place) {
+            var isDisplay = place.title.toLowerCase().search(filter) !== -1;
+            place.display(isDisplay);
+            return isDisplay;
+        });
       }
     });
 
