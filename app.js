@@ -155,7 +155,7 @@ function initMap(){
     };
 
     // Load place datas
-    $.getJSON('/data.json', function(d) {
+    $.getJSON('data.json', function(d) {
       var mappedPlaces = $.map(d.payload.places, function(place){
         return new PlaceModel(place);
       });
