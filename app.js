@@ -23,15 +23,7 @@ function initMap(){
   // mouses over the marker.
   var highlightedIcon = makeMarkerIcon('FFFF24');
 
-  function makeInfoWindow(place) {
-    var contentString = '<h2>' + place.title + '</h2>' +
-      '<hr/>' +
-      '<p>loading data from wikipedia, please reopen later</p>';
-    var infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
-    return infowindow;
-  }
+  var infowindow = new google.maps.InfoWindow();
 
   var searchWikiAlertOnce = true;
 
@@ -85,8 +77,6 @@ function initMap(){
       '<hr/>' +
       '<p>loading data from wikipedia, please reopen later</p>';
 
-    self.infowindow = makeInfoWindow(place);
-
     self.marker = self.makeMarker(place, self.active);
 
     self.display.subscribe(function(display) {
@@ -95,11 +85,14 @@ function initMap(){
 
     self.active.subscribe(function(active){
       if (active) {
-        self.infowindow.setContent(self.contentHTML);
-        self.infowindow.open(map, self.marker);
+        infowindow.setContent(self.contentHTML);
+        infowindow.open(map, self.marker);
         self.marker.setIcon(highlightedIcon);
+        google.maps.event.addListener(infowindow,'closeclick',function(){
+          self.active(false);
+        });
       } else {
-        self.infowindow.close();
+        infowindow.close();
         self.marker.setIcon(defaultIcon);
       }
     });
