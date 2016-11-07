@@ -1,0 +1,64 @@
+* {
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+header {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+}
+
+a#menu svg {
+  width: 40px;
+  fill: black;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+aside {
+  background-color: rgba(255,255,255,0.6);
+  width: 300px;
+  height: 100%;
+  padding: 1em;
+  z-index: 1;
+  position: absolute;
+  transform: translate(-300px,0);
+  transition: transform 0.3s ease;
+}
+
+aside.open {
+  transform: translate(0,0);
+}
+
+main {
+  height: 100%;
+  width: 100%
+}
+
+
+#map {
+  height: 100%;
+}
+
+@media screen and (min-width: 700px) {
+  .container {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+  aside {
+    position: relative;
+    transform: translate(0,0);
+  }
+  header {
+    display: none;
+  }
+}
