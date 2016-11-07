@@ -190,18 +190,13 @@ function initMap(){
     });
   };
 
-  ko.applyBindings(new NeighorhoodViewModel());
+  if (typeof google !== 'undefined') {
+    ko.applyBindings(new NeighorhoodViewModel());
+  } else {
+    googleError();
+  }
 };
 
-$(function() {
-  setTimeout(function () {
-    try{
-      if (!window.google) {
-        $('#map').html('<h3>Ah... Error Occurred. Cannot connect to google maps api! Please check your network connection.<h3>');
-      }
-    }
-    catch (e) {
-      $('#map').text('<h3>Ah... Error Occurred! Please check your network!<h3>');
-    }
-  }, 5000);
-});
+function googleError() {
+  $('#map').html('<h3>Ah... Error Occurred. Cannot connect to google maps api! Please check your network connection.<h3>');
+}
