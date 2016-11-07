@@ -23,22 +23,6 @@ function initMap(){
   // mouses over the marker.
   var highlightedIcon = makeMarkerIcon('FFFF24');
 
-  function makeMarker(place, active) {
-    var marker = new google.maps.Marker({
-      position: place.location,
-      title: place.title,
-      icon: defaultIcon,
-      animation: google.maps.Animation.DROP
-    });
-
-    // When the click the mark can active or deactive this place
-    marker.addListener('click', function() {
-      active(!active());
-    });
-
-    return marker;
-  }
-
   function makeInfoWindow(place) {
     var contentString = '<h2>' + place.title + '</h2>' +
       '<hr/>' +
@@ -106,7 +90,7 @@ function initMap(){
 
     self.infowindow = makeInfoWindow(place);
 
-    self.marker = makeMarker(place, self.active);
+    self.marker = self.makeMarker(place, self.active);
 
     self.display.subscribe(function(display) {
       if (display) {
@@ -128,6 +112,22 @@ function initMap(){
 
     searchWiki(self);
   };
+
+  PlaceModel.prototype.makeMarker = function(place, active) {
+    var marker = new google.maps.Marker({
+      position: place.location,
+      title: place.title,
+      icon: defaultIcon,
+      animation: google.maps.Animation.DROP
+  });
+
+    // When the click the mark can active or deactive this place
+    marker.addListener('click', function() {
+      active(!active());
+    });
+
+    return marker;
+  }
 
   var NeighorhoodViewModel = function() {
     var self = this;
