@@ -148,8 +148,10 @@ function initMap(){
       return displayPlaces;
     });
 
-    self.filter = function() {
-      var searchString = $('#filter').val().toLowerCase();
+    self.filterKeyword = ko.observable('');
+
+    self.filterKeyword.subscribe(function(kw) {
+      var searchString = kw.toLowerCase();
       var places = self.places();
       for (var i = places.length - 1; i >= 0; i--) {
         if ( places[i].title.toLowerCase().search(searchString) != -1){
@@ -158,7 +160,7 @@ function initMap(){
           places[i].display(false);
         }
       }
-    };
+    });
 
     self.deactiveAll = function() {
       var places = self.places();

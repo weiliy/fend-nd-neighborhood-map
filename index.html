@@ -11,7 +11,7 @@
   <div class="container">
     <aside data-bind="css: { open: isOpenSiderbar() }">
       <h2>Hong Kong Neighorhood Map</h2>
-      <input id='filter' type="text" placeholder="search here" data-bind="event: {keyup: filter}">
+      <input id='filter' type="text" placeholder="search here" data-bind="textInput: filterKeyword">
       <ul data-bind="foreach: displayPlaces()">
         <li data-bind="text: $data.title, click: $root.activeThis"></li>
       </ul>
