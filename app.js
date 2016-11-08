@@ -54,9 +54,6 @@ function initMap(){
         infowindow.setContent(self.contentHTML);
         infowindow.open(map, self.marker);
         self.marker.setIcon(highlightedIcon);
-        google.maps.event.addListener(infowindow,'closeclick',function(){
-          self.active(false);
-        });
       } else {
         infowindow.close();
         self.marker.setIcon(defaultIcon);
@@ -183,6 +180,10 @@ function initMap(){
       }
 
       self.places(mappedPlaces);
+
+      google.maps.event.addListener(infowindow,'closeclick',function(){
+        self.deactiveAll();
+      });
     }).fail(function(){
       alert("failed to load data.json");
     });
