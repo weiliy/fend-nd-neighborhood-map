@@ -1,5 +1,3 @@
-
-
 {
   "success": true,
   "payload": {
@@ -72,13 +70,6 @@
         "location": {
           "lat": 22.200006,
           "lng": 114.135017
-        }
-      },
-      {
-        "title": "Repulse Bay",
-        "location": {
-          "lat": 66.528295,
-          "lng": -86.244657
         }
       },
       {

@@ -2,7 +2,7 @@
 
 ## Introducation
 
-This app show 25 interesting places in Hongkong. Holp you enjoy it.
+This app show 24 interesting places in Hongkong. Holp you enjoy it.
 
 ## Run
 
