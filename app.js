@@ -39,6 +39,8 @@ function initMap(){
 
     self.location = place.location;
 
+    self.latLng = new google.maps.LatLng(place.location)
+
     self.contentHTML = '<h2>' + place.title + '</h2>' +
       '<hr/>' +
       '<p>loading data from wikipedia, please reopen later</p>';
@@ -139,9 +141,8 @@ function initMap(){
 
     self.displayPlaces.subscribe(function(places){
       infowindow.close();
-      places.forEach(function(place){
-        place.active(false);
-      });
+      self.deactiveAll();
+      self.resizeMap();
     });
 
     self.active = ko.observable(-1);
@@ -186,7 +187,16 @@ function initMap(){
     }).fail(function(){
       alert("failed to load data.json");
     });
+
   };
+
+  NeighorhoodViewModel.prototype.resizeMap = function() {
+    var bounds = new google.maps.LatLngBounds();
+    this.displayPlaces().forEach(function(place){
+      bounds.extend(place.latLng);
+    });
+    map.fitBounds(bounds);
+  }
 
   if (typeof google !== 'undefined') {
     ko.applyBindings(new NeighorhoodViewModel());
