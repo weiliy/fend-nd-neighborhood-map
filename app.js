@@ -27,40 +27,6 @@ function initMap(){
 
   var searchWikiAlertOnce = true;
 
-  var searchWiki = function(place) {
-    var apiUrl = 'https://en.wikipedia.org/w/api.php';
-    var contentHTML;
-
-    var jqXHR = $.ajax({
-      url: apiUrl,
-      data: {
-        format: 'json',
-        action: 'opensearch',
-        search: place.title,
-        limit: 5
-      },
-      dataType: 'jsonp',
-      type: 'POST',
-      headers: { 'Api-User-Agent': 'fend/1.0' },
-    });
-
-    jqXHR.done(function(d){
-      place.contentHTML = '<h2>' + place.title + '</h2>' +
-        '<hr/>' +
-        '<a href="' + (d[3][1] || d[3]) + '">' + (d[1][1] || d[1]) + '</a>' +
-        '<p>' + (d[2][1] || d[2]) + '</p>';
-    });
-
-    jqXHR.fail(function(d){
-      if ( searchWikiAlertOnce ) {
-        alert('unable to connect to wikipedia.');
-        searchWikiAlertOnce = false;
-      }
-
-      place.contentHTML = '<h2>' + place.title + '<h2>';
-    });
-  };
-
   var PlaceModel = function(place) {
     var self = this;
     // if this place display on the map
@@ -115,6 +81,40 @@ function initMap(){
     });
 
     return marker;
+  };
+
+  var searchWiki = function(place) {
+    var apiUrl = 'https://en.wikipedia.org/w/api.php';
+    var contentHTML;
+
+    var jqXHR = $.ajax({
+      url: apiUrl,
+      data: {
+        format: 'json',
+        action: 'opensearch',
+        search: place.title,
+        limit: 5
+      },
+      dataType: 'jsonp',
+      type: 'POST',
+      headers: { 'Api-User-Agent': 'fend/1.0' },
+    });
+
+    jqXHR.done(function(d){
+      place.contentHTML = '<h2>' + place.title + '</h2>' +
+        '<hr/>' +
+        '<a href="' + (d[3][1] || d[3]) + '">' + (d[1][1] || d[1]) + '</a>' +
+        '<p>' + (d[2][1] || d[2]) + '</p>';
+    });
+
+    jqXHR.fail(function(d){
+      if ( searchWikiAlertOnce ) {
+        alert('unable to connect to wikipedia.');
+        searchWikiAlertOnce = false;
+      }
+
+      place.contentHTML = '<h2>' + place.title + '<h2>';
+    });
   };
 
   var NeighorhoodViewModel = function() {
