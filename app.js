@@ -45,7 +45,7 @@ function initMap(){
       '<hr/>' +
       '<p>loading data from wikipedia, please reopen later</p>';
 
-    self.marker = self.makeMarker(place, self.active);
+    self.marker = self.makeMarker(place);
 
     self.display.subscribe(function(display) {
       self.marker.setVisible(display);
@@ -65,7 +65,7 @@ function initMap(){
     self.searchWiki();
   };
 
-  PlaceModel.prototype.makeMarker = function(place, active) {
+  PlaceModel.prototype.makeMarker = function(place) {
     var marker = new google.maps.Marker({
       map: map,
       position: place.location,
@@ -176,13 +176,19 @@ function initMap(){
       for (var i = 0; i < places.length; i++) {
         places[i].marker.addListener('click', function(place) {
           return function() {
-            self.active(self.displayPlaces().indexOf(place));
+            var id = self.displayPlaces().indexOf(place);
+            if ( self.active() !== id) {
+              self.active(self.displayPlaces().indexOf(place));
+            } else {
+              self.active(-1);
+            }
           };
         }(places[i]));
       }
 
       google.maps.event.addListener(infowindow,'closeclick',function(){
         self.deactiveAll();
+        self.active(-1);
       });
     }).fail(function(){
       alert("failed to load data.json");
