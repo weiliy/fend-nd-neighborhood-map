@@ -146,6 +146,13 @@ function initMap(){
       }
     });
 
+    self.displayPlaces.subscribe(function(places){
+      infowindow.close();
+      places.forEach(function(place){
+        place.active(false);
+      });
+    });
+
     self.deactiveAll = function() {
       var places = self.places();
       for (var i = places.length - 1; i >= 0; i--) {
