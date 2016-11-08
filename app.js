@@ -30,7 +30,7 @@ function initMap(){
   var PlaceModel = function(place) {
     var self = this;
     // if this place display on the map
-    self.display = ko.observable(false);
+    self.display = ko.observable(true);
 
     // if this place is active
     self.active = ko.observable(false);
@@ -70,13 +70,7 @@ function initMap(){
       title: place.title,
       icon: defaultIcon,
       animation: google.maps.Animation.DROP
-  });
-
-    // When the click the mark can active or deactive this place
-    marker.addListener('click', function() {
-      active(!active());
     });
-
     return marker;
   };
 
@@ -133,7 +127,7 @@ function initMap(){
         places.forEach(function(place) {
           place.display(true);
         });
-        return places
+        return places;
       } else {
         return ko.utils.arrayFilter(places, function(place) {
             var isDisplay = place.title.toLowerCase().search(filter) !== -1;
@@ -175,11 +169,16 @@ function initMap(){
       var mappedPlaces = $.map(d.payload.places, function(place){
         return new PlaceModel(place);
       });
-      for (var i = mappedPlaces.length - 1; i >= 0; i--) {
-        mappedPlaces[i].display(true);
-      }
-
       self.places(mappedPlaces);
+      var places = self.places()
+
+      for (var i = 0; i < places.length; i++) {
+        places[i].marker.addListener('click', function(place) {
+          return function() {
+            self.active(self.displayPlaces().indexOf(place));
+          };
+        }(places[i]));
+      }
 
       google.maps.event.addListener(infowindow,'closeclick',function(){
         self.deactiveAll();
