@@ -63,7 +63,7 @@ function initMap(){
       }
     });
 
-    searchWiki(self);
+    self.searchWiki();
   };
 
   PlaceModel.prototype.makeMarker = function(place, active) {
@@ -83,7 +83,8 @@ function initMap(){
     return marker;
   };
 
-  var searchWiki = function(place) {
+  PlaceModel.prototype.searchWiki = function() {
+    var place = this;
     var apiUrl = 'https://en.wikipedia.org/w/api.php';
     var contentHTML;
 
