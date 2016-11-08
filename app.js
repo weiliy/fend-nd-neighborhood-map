@@ -133,7 +133,10 @@ function initMap(){
       var places = self.places();
       var filter = self.filterKeyword().toLowerCase();
       if (!filter) {
-        return places;
+        places.forEach(function(place) {
+          place.display(true);
+        });
+        return places
       } else {
         return ko.utils.arrayFilter(places, function(place) {
             var isDisplay = place.title.toLowerCase().search(filter) !== -1;
