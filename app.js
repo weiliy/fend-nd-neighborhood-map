@@ -153,6 +153,15 @@ function initMap(){
       });
     });
 
+    self.active = ko.observable(-1);
+
+    self.active.subscribe(function(id){
+      self.deactiveAll();
+      if (self.active() >= 0) {
+        self.displayPlaces()[id].active(true);
+      }
+    });
+
     self.deactiveAll = function() {
       var places = self.places();
       for (var i = places.length - 1; i >= 0; i--) {
@@ -161,8 +170,7 @@ function initMap(){
     };
 
     self.activeThis = function() {
-      self.deactiveAll();
-      this.active(true);
+      self.active(self.displayPlaces().indexOf(this));
     };
 
     // Load place datas
